@@ -25,26 +25,24 @@ class Tarea(models.Model):
     descripcion=models.TextField(null=True)
     fechaCaducidad=models.DateTimeField(db_column='fecha_caducidad')
     #relaciones
-    importancia = models.ForeignKey(to=Importancia, db_column='importancia_id', on_delete=models.RESTRICT)
+    importancia = models.ForeignKey(to=Importancia, db_column='importancia_id', on_delete=models.PROTECT,null=False)
 
     class Meta:
-        db_table='tareas'
+        db_table ='tareas'
 
 
 class Etiqueta(models.Model):
     #id      =   models.AutoField(primary_key=True, null=False)
     nombre  =   models.CharField(max_length=45, null=False, unique=True)
-    #tarea   =   models.ForeignKey(to=Tarea, db_column='tarea_id', on_delete=models.RESTRICT)
+    #tarea   =   models.ForeignKey(to=Tarea, db_column='tarea_id', #on_delete=models.RESTRICT)
 
     class Meta:
-        db_table='etiquetas'
+        db_table ='etiquetas'
 
-
-
-class TareasEtiquetas(models.Model):
+class TareaEtiquetas(models.Model):
     tarea   = models.ForeignKey(to=Tarea, db_column='tarea_id', on_delete=models.CASCADE)
     etiqueta = models.ForeignKey(to=Etiqueta, db_column='etiqueta_id', on_delete=models.CASCADE)
 
     class Meta:
-        db_tabla ='tareas_etiquetas'
+        db_table ='tareas_etiquetas'
              
